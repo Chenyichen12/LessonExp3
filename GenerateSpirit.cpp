@@ -16,17 +16,18 @@ GenerateSpirit::GenerateSpirit() {
     }
 }
 
+GenerateSpirit::GenerateSpirit(Spirit s[10]) {
+    memcpy(spirits, s, sizeof(spirits));
+    spiritNumber = 10;
+}
+
 void GenerateSpirit::takeDamages() {
     for (int i = 0; i < 10; ++i) {
         int index = (int) rand() % 10;
         int damage = (int) rand() % 1000;
         this->spirits[index].takeDamage(damage);
-//        std::cout << "对精灵" << spirits[index].getName() << "进行伤害为" << damage << "的攻击";
-//        bool a = this->spirits[index].takeDamage(damage);
-//        if (a && this->spirits[index].getHealth() == 0) {
-//            printAllSpirt();
-//        }
     }
+    showAllSpirits();
 }
 
 
@@ -116,10 +117,21 @@ void GenerateSpirit::takeDamage(int index) {
     }
 }
 
+
 void GenerateSpirit::showAllSpirits() {
     std::cout << '\n';
     for (int i = 0; i < spiritNumber; ++i) {
         spirits[i].getInfo();
         std::cout << '\n';
     }
+}
+
+void GenerateSpirit::moveSomeSpirits() {
+    for (int i = 0; i < 10; ++i) {
+        int x = rand() % 200;
+        int y = rand() % 200;
+        int index = rand() % 10;
+        spirits[index].setPosition(x, y);
+    }
+    printAllSpirt();
 }
